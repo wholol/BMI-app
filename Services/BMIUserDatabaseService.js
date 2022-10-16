@@ -30,7 +30,7 @@ function queryDatabase(queryString, succesfulLogMessage) {
 function getData(queryString) {
 
     const connection = connectToDatabase();
-    
+
     return new Promise((resolve, reject) => {
         connection.query(queryString, function (error, result) {
             if (error) throw error;
@@ -40,8 +40,7 @@ function getData(queryString) {
                 resolve(result);
             }
         });
-    } )
-    
+    } ) 
 }
 
 const BMIUserDatabaseService = {

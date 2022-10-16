@@ -8,6 +8,7 @@ BMIUserDatabaseService.createDB();
 app.listen(3000, () => { console.log('listenning to port 3000'); });
 
 app.use(express.static('public'));
+app.use(express.static('node_modules/jquery/dist/'));
 
 app.set("view engine","ejs");
 app.use(express.urlencoded({extended: true}));
@@ -52,7 +53,6 @@ app.get("/result/:name/:gender/:height/:weight",
     );
 })
 
-//redirect to home.
 app.post("/home",
     async (req, res) =>{
         res.redirect("/");
@@ -61,7 +61,8 @@ app.post("/home",
 app.get("/getData", 
     async (req, res) => {
     const result = await BMIUserDatabaseService.getUserData(req.query.name);
-    console.log("send user result");
+    console.log("getting data from database...");
+
     res.send(result);
     res.end();
 });
