@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1>Here are the results of your BMI outcome.</h1>
+        <p><%=data.name%></p>
+        <p><%=data.gender%></p>
+        <p><%=data.weight%></p>
+        <p><%=data.height%></p>
+        <p><%=data.BMIStatus%></p>
+        <p><%=data.BMIValue%></p>
+        
+        <form action="/home" method="post">
+            <input type="submit" value="Submit another BMI"/>
+        </form>
+        <p id="name">&nbsp</p>
+       <button id="searchButton" type="submit"><i class="fa fa-search" style="font-size:20px;color:white"></i></button>
+       <script src="/searchUser.js">
+       </script>
+    </body>
+</html>
