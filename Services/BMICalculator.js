@@ -30,7 +30,7 @@ const BMIResultService = {
     },
 
     get GetBMIValue() {
-        return this.BMIValue;
+        return this.BMIValue.toPrecision(1);
     },
 
     get GetBMIStatus() {

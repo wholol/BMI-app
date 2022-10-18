@@ -55,15 +55,18 @@ const BMIUserDatabaseService = {
             weight VARCHAR (255),
             height VARCHAR (255),
             BMIValue VARCHAR (255),
-            BMIStatus VARCHAR (255),
-            PRIMARY KEY (name)
+            BMIStatus VARCHAR (255)
             )`;
 
         queryDatabase(queryString, 'created database!');
+
+        queryString = `ALTER TABLE BMITable ADD UNIQUE (name)`;
+
+        queryDatabase(queryString, 'ensuring name is unique');
     },
    
     //insert into database
-    registerUserResult: (name, gender, weight, height, BMIValue) => {
+    registerUserResult: (name, gender, weight, height, BMIValue, BMIStatus) => {
 
         let queryString = `INSERT IGNORE INTO BMITable (name, gender, weight, height, BMIValue, BMIStatus) 
         VALUES (
@@ -80,7 +83,7 @@ const BMIUserDatabaseService = {
 
     //get user data from database
     getUserData: async (name) => {
-        let queryString = `SELECT name, gender, weight, height, BMIValue, BMIStatus from BMITable
+        let queryString = `SELECT * from BMITable
          WHERE name = '${name}'`;
 
         return await getData(queryString);     

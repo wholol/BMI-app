@@ -1,6 +1,8 @@
 const express = require('express');
+
 const BMIResultService = require('./Services/BMICalculator.js');
 const BMIUserDatabaseService = require('./Services/BMIUserDatabaseService');
+
 
 const app = express();
 BMIUserDatabaseService.createDB();
@@ -26,6 +28,8 @@ app.post("/", (req, res) => {
     const gender = req.body.gender;
     const height = req.body.height;
     const weight = req.body.weight;
+
+    console.log(gender);
     
     res.redirect(`/result/${name}/${gender}/${height}/${weight}`);
 })
@@ -33,13 +37,15 @@ app.post("/", (req, res) => {
 app.get("/result/:name/:gender/:height/:weight", 
     async (req, res) =>{
     
+        const result = req.params;
+        console.log(result);
     const name = req.params.name;
     const gender = req.params.gender;
     const height = req.params.height;
     const weight = req.params.weight;
 
     await BMIResultService.updateBMIResult(parseInt(height), parseInt(weight));
-    BMIUserDatabaseService.registerUserResult(name, gender, weight, height, BMIResultService,  BMIResultService.GetBMIStatus, BMIResultService.GetBMIValue);
+    BMIUserDatabaseService.registerUserResult(name, gender, weight, height, BMIResultService.GetBMIValue, BMIResultService.GetBMIStatus);
 
     res.render("resultPage", {data:
         {
@@ -61,6 +67,7 @@ app.post("/home",
 app.get("/getData", 
     async (req, res) => {
     const result = await BMIUserDatabaseService.getUserData(req.query.name);
+    
     console.log("getting data from database...");
 
     res.send(result);

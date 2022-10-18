@@ -1,6 +1,11 @@
 const ENTER_KEY_CODE = 13;
 
 const nameID = $("#name");
+const genderID = $("#gender");
+const weightID = $("#weight");
+const heightID = $("#height");
+const BMIValueID = $("#BMIValue");
+const BMIStatusID = $("#BMIStatus");
 const searchBar = $("#searchBar");
 const searchButton = $("#searchButton");
 
@@ -21,9 +26,17 @@ async function fetchUser(name) {
     try {
         const response = await fetch(`/getData/?name=${name}`);
         const json = await response.json();
-        console.log(json[0].name);
-        nameID.text(`${json[0].name}`);
 
+        if (result) {
+            nameID.text(`${result.name}`);
+            genderID.text(`${result.gender}`);
+            weightID.text(`${result.weight}`);
+            heightID.text(`${result.height}`);
+            BMIValueID.text(`${result.BMIValue}`);
+            BMIStatusID.text(`${result.BMIStatus}`);
+        } else {
+            nameID.text("no record of this user was found.");
+        } 
     } catch (err) {
         console.log(err);
     }  
